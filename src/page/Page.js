@@ -7,7 +7,14 @@ class Page extends React.Component {
         super(props);
         this.state = {
             taskInput: "",
-            taskList: ["task 1"],
+            taskId: 0,
+            taskList: [
+                {
+                    id: 100,
+                    task: "first one",
+                    isComplete: true,
+                },
+            ],
         };
     }
 
@@ -18,9 +25,27 @@ class Page extends React.Component {
     handleTaskAdd = (event) => {
         event.preventDefault();
         this.setState({
-            taskList: [...this.state.taskList, this.state.taskInput],
+            taskList: [
+                ...this.state.taskList,
+                {
+                    id: this.state.taskId,
+                    task: this.state.taskInput,
+                    isComplete: false,
+                },
+            ],
             taskInput: "",
+            taskId: this.state.taskId + 1,
         });
+    };
+
+    markComplete = (completedTaskId) => {
+        const updatedTaskList = this.state.taskList.map((task) => {
+            if (task.id === completedTaskId) {
+                return { ...task, isComplete: true };
+            }
+            return task;
+        });
+        this.setState({ taskList: updatedTaskList });
     };
 
     render() {
@@ -36,7 +61,12 @@ class Page extends React.Component {
                         />
                     </label>
                 </form>
-                <List tasks={this.state.taskList} />
+                <List
+                    tasks={this.state.taskList}
+                    markComplete={(taskId) =>
+                        this.markComplete(taskId)
+                    }
+                />
             </div>
         );
     }

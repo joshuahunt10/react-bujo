@@ -9,10 +9,11 @@ The purpose of this app is simply to work on my skills in React. It is a simple 
 
 ## Design
 
-### Features
+### Features / To Do
 
 -   ~~Ability to add to dos~~
--   Ability to mark to dos as complete
+-   ~~Ability to mark to dos as complete~~
+-   Fix key prop warning
 -   Ability to delete to dos
 -   Ability to create multiple "pages" of todos
 -   Ability to categorize a to do when created
